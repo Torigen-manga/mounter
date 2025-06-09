@@ -6,12 +6,11 @@ interface Sections {
   containsMoreItems: boolean;
 }
 
-enum SectionItemType {
-  SinglowRowNormal = "SingleRowNormal",
-  SingleRowLarge = "SingleRowLarge",
-  DobleRow = "DoubleRow",
-  Featured = "Featured",
-}
+type SectionItemType =
+  | "SingleRowNormal"
+  | "SingleRowLarge"
+  | "DoubleRow"
+  | "Featured";
 
 interface SectionItem {
   id: string;

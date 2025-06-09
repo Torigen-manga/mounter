@@ -15,11 +15,6 @@ interface MangaEntry {
   image: string;
 }
 
-enum Status {
-  Completed = "Completed",
-  Ongoing = "Ongoing",
-  Hiatus = "Hiatus",
-  Cancelled = "Cancelled",
-}
+type Status = "Completed" | "Ongoing" | "Hiatus" | "Cancelled" | "Unknown";
 
 export type { Manga, MangaEntry, Status };
