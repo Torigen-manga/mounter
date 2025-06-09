@@ -4,7 +4,7 @@ interface Chapter {
   volume?: string;
   number: number;
   scanlator?: string;
-  pages: number;
+  pages: string[];
   groups?: string[];
   language?: string;
   releaseDate?: string;
