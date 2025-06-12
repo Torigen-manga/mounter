@@ -2,15 +2,20 @@ import type {
   MangaProvider,
   SearchResultsProvider,
   HomepageProvider,
-} from "./interfaces";
+  SourceFieldsMetadata,
+  SourceCapabilities,
+} from ".";
 
 interface SourceProvider
   extends MangaProvider,
     HomepageProvider,
-    SearchResultsProvider {
+    SearchResultsProvider,
+    SourceCapabilities {
   readonly id: string;
   readonly name: string;
   readonly iconUrl: string;
+  readonly capabilities: SourceCapabilities;
+  readonly fieldsMetadata: SourceFieldsMetadata;
 }
 
 export type { SourceProvider };
