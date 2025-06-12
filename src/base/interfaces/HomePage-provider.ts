@@ -1,8 +1,8 @@
-import type { Sections } from "../../generated/home";
+import type { Section } from "../../generated/home";
 import type { PagedResults } from "./SearchResult-provider";
 
 interface HomepageProvider {
-  getHomepage(): Promise<Sections[]>;
+  getHomepage(): Promise<Section[]>;
   getViewMoreItems?(sectionId: string, metadata: any): Promise<PagedResults>;
 }
 

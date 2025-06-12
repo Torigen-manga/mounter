@@ -1,4 +1,4 @@
-interface Sections {
+interface Section {
   id: string;
   title: string;
   items: SectionItem[];
@@ -15,8 +15,7 @@ type SectionItemType =
 interface SectionItem {
   id: string;
   title: string;
-  image?: string;
-  action?: () => void;
+  image: string;
 }
 
-export type { Sections, SectionItem, SectionItemType };
+export type { Section, SectionItem, SectionItemType };
