@@ -39,12 +39,7 @@ interface PagedResults {
 
 interface SearchResultsProvider {
   getSearchResults(query: SearchRequest): Promise<PagedResults>;
-
   getSearchTags?(): Promise<Tag[]>;
-
-  supportIncludeTags: boolean;
-  supportExcludeTags: boolean;
-  supportPagination: boolean;
 }
 
 export type {
