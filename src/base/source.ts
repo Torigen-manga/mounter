@@ -11,7 +11,6 @@ interface SourceProvider
   extends MangaProvider,
     HomepageProvider,
     SearchResultsProvider {
-  readonly info: SourceInfo;
   readonly capabilities: SourceCapabilities;
   readonly fieldsMetadata: SourceFieldsMetadata;
 }
