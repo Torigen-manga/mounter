@@ -3,6 +3,7 @@ import type { Tag } from "./tag";
 interface Manga {
   image: string;
   title: string;
+  description: string;
   artists: string[];
   authors: string[];
   tags: Tag[];
