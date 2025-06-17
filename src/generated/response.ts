@@ -1,4 +1,4 @@
-import type { Request } from "./request";
+import type { AppRequest } from "./request";
 import type { RawData } from "./raw-data";
 
 export interface Reponse {
@@ -6,5 +6,5 @@ export interface Reponse {
   rawData?: RawData;
   readonly status: number;
   readonly headers: Record<any, any>;
-  readonly request: Request;
+  readonly request: AppRequest;
 }

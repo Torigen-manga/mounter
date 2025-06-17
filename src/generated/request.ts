@@ -1,12 +1,12 @@
 import type { Cookie } from "./cookie";
 
-interface Request {
+interface AppRequest {
   url: string;
-  method: string;
+  method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
   headers?: Record<string, string>;
-  data?: any;
-  param?: string;
-  cookis: Cookie[];
+  params?: Record<string, any>;
+  data?: Record<string, any> | string;
+  cookies?: Cookie[];
 }
 
-export type { Request };
+export type { AppRequest };
