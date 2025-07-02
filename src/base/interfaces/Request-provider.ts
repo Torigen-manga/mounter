@@ -1,5 +1,3 @@
-// src/renderer/services/RequestManager.ts
-
 import type { AppRequest } from "../../generated";
 
 interface RequestManager {

@@ -10,7 +10,9 @@ import type {
   SourceProvider,
 } from "./interfaces";
 
-abstract class AbstractSource implements SourceProvider {
+abstract class AbstractSource<T extends SourceCapabilities>
+  implements SourceProvider
+{
   /**
    * The RequestManager is a dependency injected by the host application.
    * It's the only tool the extension has for making network requests.
@@ -27,54 +29,48 @@ abstract class AbstractSource implements SourceProvider {
   /**
    * A declaration of what this source can and cannot do.
    */
-  abstract readonly capabilities: SourceCapabilities;
+  abstract readonly capabilities: T;
   /**
    * A schema describing the parameters for search and "view more" sections.
    */
   abstract readonly fieldsMetadata: SourceFieldsMetadata;
 
   /**
-
-   * The constructor now only takes the true dependency.
+   * The constructor now only takes the network dependency.
    * @param requestManager An object for making network requests, provided by the host app.
    */
   constructor(requestManager: RequestManager) {
     this.requestManager = requestManager;
   }
 
-  // --- REQUIRED METHODS ---
+  // --- METHODS ---
   // These methods must be implemented by the source.
-  abstract getHomepage(): Promise<Section[]>;
-  abstract getSearchResults(query: SearchRequest): Promise<PagedResults>;
+  abstract getHomepage(): T["supportsHomepage"] extends true
+    ? Promise<Section[]>
+    : never;
+
+  abstract getSearchResults(
+    query: SearchRequest
+  ): T["supportsSearch"] extends true ? Promise<PagedResults> : never;
 
   abstract getMangaDetails(mangaId: string): Promise<Manga>;
   abstract getChapters(mangaId: string): Promise<ChapterEntry[]>;
+
   abstract getChapterDetails(
     mangaId: string,
     chapterId: string
   ): Promise<Chapter>;
 
-  // --- OPTIONAL METHODS ---
-  // These have default implementations. The subclass can override them if needed.
-  async getViewMoreItems(
+  abstract getViewMoreItems(
     sectionId: string,
     metadata: any
-  ): Promise<PagedResults> {
-    console.warn(
-      `Source "${this.info.id}" does not implement getViewMoreItems.`
-    );
-    return {
-      results: [],
-      hasNextPage: false,
-      hasPreviousPage: false,
-      limit: 0,
-      totalCount: 0,
-    };
-  }
+  ): T["supportsViewMore"] extends true ? Promise<PagedResults> : never;
 
-  async getSearchTags(): Promise<Tag[]> {
-    return [];
-  }
+  abstract getSearchTags(): T[
+    | "supportIncludeTags"
+    | "supportExcludeTags"] extends true
+    ? Promise<Tag[]>
+    : never;
 }
 
 export { AbstractSource };
