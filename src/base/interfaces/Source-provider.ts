@@ -3,7 +3,7 @@ import type {
   SearchResultsProvider,
   HomepageProvider,
   SourceFieldsMetadata,
-} from "..";
+} from ".";
 
 type Dependency = {
   name: string;

@@ -1,4 +1,4 @@
-import type { Tag, MangaEntry } from "../..";
+import type { Tag, MangaEntry, PagedResults } from "../..";
 
 type TagOperator = "AND" | "OR";
 type SearchParameterValue = string | number | boolean | string[] | number[];
@@ -17,34 +17,13 @@ interface SearchRequest {
   readonly parameters: Record<string, SearchParameterValue>;
 }
 
-interface PagedResults {
-  readonly results: MangaEntry[];
-
-  readonly totalCount: number;
-  readonly hasNextPage: boolean;
-  readonly hasPreviousPage: boolean;
-
-  readonly currentPage?: number;
-  readonly totalPages?: number;
-
-  readonly limit: number;
-  readonly offset?: number;
-
-  readonly metadata?: Record<string, any> & {
-    loadingPattern?: "continuous" | "paged" | "infinite";
-    nextOffset?: number;
-    nextPage?: number;
-  };
-}
-
 interface SearchResultsProvider {
-  getSearchResults(query: SearchRequest): Promise<PagedResults>;
+  getSearchResults(query: SearchRequest): Promise<PagedResults<MangaEntry>>;
   getSearchTags?(): Promise<Tag[]>;
 }
 
 export type {
   SearchRequest,
-  PagedResults,
   SearchResultsProvider,
   TagOperator,
   SearchParameterValue,
