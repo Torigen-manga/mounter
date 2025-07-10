@@ -21,13 +21,8 @@ import type {
  * Abstract class that serves as the base for implementing sources for manga readers.
  * Provides the necessary structure and functionality for extensions to interact with
  * the host application, defining capabilities and metadata related to the source.
- *
- * @template T - A specific type that extends `SourceCapabilities`, describing the
- * supported capabilities for the source.
  */
-abstract class AbstractSource<T extends SourceCapabilities>
-  implements SourceProvider
-{
+abstract class AbstractSource implements SourceProvider {
   /**
    * A network request manager provided by the host application. This is the only tool
    * the extension has for making network requests.
@@ -49,7 +44,7 @@ abstract class AbstractSource<T extends SourceCapabilities>
    * the source can provide, such as search, homepage retrieval, etc.
    * The specific capabilities depend on the `T` type, which extends `SourceCapabilities`.
    */
-  abstract readonly capabilities: T;
+  abstract readonly capabilities: SourceCapabilities;
 
   /**
    * Metadata for the source's fields, typically related to search parameters and "view more" sections.
@@ -72,27 +67,23 @@ abstract class AbstractSource<T extends SourceCapabilities>
   // Each method is conditional based on the source's capabilities, which are determined by `T`.
 
   /**
-   * Fetches the homepage data for the source. This method is only available if the source supports
-   * the `supportsHomepage` capability.
+   * Fetches the homepage data for the source.
+   * Subclasses should throw an error if `supportsHomepage` is false.
    *
    * @returns A promise that resolves with an array of sections representing the homepage.
    */
-  abstract getHomepage(): T["supportsHomepage"] extends true
-    ? Promise<Section[]>
-    : never;
+  abstract getHomepage(): Promise<Section[]>;
 
   /**
-   * Retrieves search results based on the provided query. This method is only available if the source
-   * supports the `supportsSearch` capability.
+   * Retrieves search results based on the provided query. 
+   * Subclasses should throw an error if `supportsSearch` is false.
    *
    * @param query - The search query to execute.
    * @returns A promise that resolves with a `PagedResults` object containing the search results.
    */
   abstract getSearchResults(
     query: SearchRequest
-  ): T["supportsSearch"] extends true
-    ? Promise<PagedResults<MangaEntry>>
-    : never;
+  ): Promise<PagedResults<MangaEntry>>;
 
   /**
    * Fetches details for a specific manga. This method is required for all sources.
@@ -123,8 +114,8 @@ abstract class AbstractSource<T extends SourceCapabilities>
   ): Promise<Chapter>;
 
   /**
-   * Fetches additional items for a specific section. This method is only available if the source
-   * supports the `supportsViewMore` capability.
+   * Fetches additional items for a specific section.
+   * Subclasses should throw an error if `supportsViewMore` is false.
    *
    * @param sectionId - The ID of the section to fetch additional items for.
    * @param metadata - Metadata used to fetch additional items (e.g., pagination info).
@@ -133,21 +124,15 @@ abstract class AbstractSource<T extends SourceCapabilities>
   abstract getViewMoreItems(
     sectionId: string,
     metadata: any
-  ): T["supportsViewMore"] extends true
-    ? Promise<PagedResults<MangaEntry>>
-    : never;
+  ): Promise<PagedResults<MangaEntry>>;
 
   /**
-   * Fetches a list of tags that can be included or excluded in search filters. This method is only
-   * available if the source supports `supportIncludeTags` or `supportExcludeTags`.
+   * Fetches a list of tags that can be included or excluded in search filters.
+   * Subclasses should throw an error if `supportIncludeTags` or `supportExcludeTags` is false.
    *
    * @returns A promise that resolves with an array of `Tag` objects.
    */
-  abstract getSearchTags(): T[
-    | "supportIncludeTags"
-    | "supportExcludeTags"] extends true
-    ? Promise<Tag[]>
-    : never;
+  abstract getSearchTags(): Promise<Tag[]>;
 }
 
 export { AbstractSource };
