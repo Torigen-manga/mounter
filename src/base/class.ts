@@ -10,9 +10,9 @@ import type {
 
 import type {
   RequestManager,
+  SearchMetadata,
   SearchRequest,
   SourceCapabilities,
-  SourceFieldsMetadata,
   SourceInfo,
   SourceProvider,
 } from "./interfaces";
@@ -47,10 +47,11 @@ abstract class AbstractSource implements SourceProvider {
   abstract readonly capabilities: SourceCapabilities;
 
   /**
-   * Metadata for the source's fields, typically related to search parameters and "view more" sections.
-   * This defines how fields are structured for searching or viewing more content.
+   * Metadata schema for search parameters. This defines the structure of the search parameters
+   * that can be used when querying the source.
+   * The specific metadata schema is defined by the subclass.
    */
-  abstract readonly fieldsMetadata: SourceFieldsMetadata;
+  abstract readonly searchMetadata: SearchMetadata;
 
   /**
    * The constructor, which takes a `RequestManager` as an argument. This manager is used
@@ -75,7 +76,7 @@ abstract class AbstractSource implements SourceProvider {
   abstract getHomepage(): Promise<Section[]>;
 
   /**
-   * Retrieves search results based on the provided query. 
+   * Retrieves search results based on the provided query.
    * Subclasses should throw an error if `supportsSearch` is false.
    *
    * @param query - The search query to execute.
@@ -118,12 +119,12 @@ abstract class AbstractSource implements SourceProvider {
    * Subclasses should throw an error if `supportsViewMore` is false.
    *
    * @param sectionId - The ID of the section to fetch additional items for.
-   * @param metadata - Metadata used to fetch additional items (e.g., pagination info).
+   * @param page - The page number to fetch.
    * @returns A promise that resolves with a `PagedResults` object containing the additional items.
    */
   abstract getViewMoreItems(
     sectionId: string,
-    metadata: any
+    page: number
   ): Promise<PagedResults<MangaEntry>>;
 
   /**

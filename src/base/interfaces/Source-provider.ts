@@ -2,7 +2,7 @@ import type {
   MangaProvider,
   SearchResultsProvider,
   HomepageProvider,
-  SourceFieldsMetadata,
+  SearchMetadata,
 } from ".";
 
 type Dependency = {
@@ -35,7 +35,7 @@ interface SourceProvider
     SearchResultsProvider {
   readonly info: SourceInfo;
   readonly capabilities: SourceCapabilities;
-  readonly fieldsMetadata: SourceFieldsMetadata;
+  readonly searchMetadata: SearchMetadata;
 }
 
 export type { SourceProvider, SourceCapabilities, SourceInfo, Dependency };

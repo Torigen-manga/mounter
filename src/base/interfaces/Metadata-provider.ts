@@ -11,9 +11,8 @@ interface MetadataSchema {
   };
 }
 
-interface SourceFieldsMetadata {
-  readonly viewMore: { [sectionId: string]: MetadataSchema };
-  readonly search: MetadataSchema;
+interface SearchMetadata {
+  readonly params: MetadataSchema;
 }
 
-export type { SourceFieldsMetadata, MetadataSchema };
+export type { SearchMetadata, MetadataSchema };
