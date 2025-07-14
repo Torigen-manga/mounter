@@ -1,6 +1,6 @@
 interface MetadataSchema {
   readonly [key: string]: {
-    readonly tile: string;
+    readonly title: string;
     readonly type: "number" | "string" | "boolean" | "select";
     readonly required?: boolean;
     readonly default?: any;
