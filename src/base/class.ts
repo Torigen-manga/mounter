@@ -10,7 +10,7 @@ import type {
 
 import type {
   RequestManager,
-  SearchMetadata,
+  MetadataProvider,
   SearchRequest,
   SourceCapabilities,
   SourceInfo,
@@ -47,11 +47,11 @@ abstract class AbstractSource implements SourceProvider {
   abstract readonly capabilities: SourceCapabilities;
 
   /**
-   * Metadata schema for search parameters. This defines the structure of the search parameters
-   * that can be used when querying the source.
-   * The specific metadata schema is defined by the subclass.
+   * Metadata provider for the source. This provides additional metadata about the source,
+   * such as configuration options and search parameters.
+   * This is defined by the subclass and must conform to the `MetadataProvider` interface.
    */
-  abstract readonly searchMetadata: SearchMetadata;
+  abstract readonly metadata: MetadataProvider;
 
   /**
    * The constructor, which takes a `RequestManager` as an argument. This manager is used

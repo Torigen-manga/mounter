@@ -1,17 +1,11 @@
 /**
  * Represents a tag associated with manga content.
  * Tags can represent genres, themes, or other relevant identifiers.
+ * @property id - Unique identifier for the tag.
+ * @property label - The name or label of the tag.
  */
 interface Tag {
-  /**
-   * The unique identifier for the tag.
-   */
   readonly id: string;
-
-  /**
-   * The label or name of the tag.
-   * This is the display name that will be shown in the UI, such as "Action", "Romance", etc.
-   */
   readonly label: string;
 }
 

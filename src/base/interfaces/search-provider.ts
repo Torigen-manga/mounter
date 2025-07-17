@@ -1,4 +1,4 @@
-import type { Tag, MangaEntry, PagedResults } from "../..";
+import type { Tag, MangaEntry, PagedResults } from "../../generated";
 
 type TagOperator = "AND" | "OR";
 type SearchParameterValue = string | number | boolean | string[] | number[];

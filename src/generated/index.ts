@@ -5,3 +5,5 @@ export * from "./home";
 export * from "./cookie";
 export * from "./request";
 export * from "./results";
+export * from "./locale";
+export * from "./metadata";

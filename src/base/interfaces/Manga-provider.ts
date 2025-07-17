@@ -1,4 +1,4 @@
-import type { Chapter, ChapterEntry, Manga } from "../..";
+import type { Chapter, ChapterEntry, Manga } from "../../generated";
 
 interface MangaProvider {
   getMangaDetails(mangaId: string): Promise<Manga>;

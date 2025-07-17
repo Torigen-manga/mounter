@@ -2,12 +2,13 @@ import type {
   MangaProvider,
   SearchResultsProvider,
   HomepageProvider,
-  SearchMetadata,
+  MetadataProvider,
 } from ".";
+import type { LocaleKey } from "../../generated/locale";
 
 type Dependency = {
-  name: string;
-  version?: string;
+  readonly name: string;
+  readonly version?: string;
 };
 
 interface SourceCapabilities {
@@ -27,6 +28,7 @@ interface SourceInfo {
   baseUrl: string;
   version?: string;
   dependencies?: Dependency[];
+  locale: LocaleKey | "multi";
 }
 
 interface SourceProvider
@@ -35,7 +37,7 @@ interface SourceProvider
     SearchResultsProvider {
   readonly info: SourceInfo;
   readonly capabilities: SourceCapabilities;
-  readonly searchMetadata: SearchMetadata;
+  readonly metadata: MetadataProvider;
 }
 
 export type { SourceProvider, SourceCapabilities, SourceInfo, Dependency };
