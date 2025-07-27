@@ -29,6 +29,8 @@ interface Chapter {
  * Represents a brief entry for a chapter, typically used in listings or search results.
  * @property id - Unique identifier for the chapter.
  * @property title - The title of the chapter.
+ * @property number - The chapter number.
+ * @property volume - The volume number this chapter belongs to (optional, defaults to 1).
  * @property timestamp - An optional timestamp indicating when the chapter was released or last updated.
  */
 interface ChapterEntry {
