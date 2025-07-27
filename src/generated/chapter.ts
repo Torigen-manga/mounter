@@ -34,6 +34,8 @@ interface Chapter {
 interface ChapterEntry {
   id: string;
   title: string;
+  number: number;
+  volume?: string;
   timestamp?: string;
 }
 
